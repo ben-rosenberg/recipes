@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | Recipe Network</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"
+</head>
+<body>
+    <div class="content flex_row">
+        <div class="register_box flex_col">
+            <h1>Register</h1>
+            <form action="/validate_registration" method="post">
+                <div class="flex_col form_container">
+                    <div>
+                        <label for="first_name">First Name<span class="required">*</span></label>
+                        <input type="text" name="first_name">
+                        {% for message in get_flashed_messages(category_filter = ['error_users_first_name'])%}
+                            <p class="error">{{ message }}</p>
+                        {% endfor %}
+                    </div>
+                    <div>
+                        <label for="last_name">Last Name<span class="required">*</span></label>
+                        <input type="text" name="last_name">
+                        {% for message in get_flashed_messages(category_filter = ['error_users_last_name'])%}
+                            <p class="error">{{ message }}</p>
+                        {% endfor %}
+                    </div>
+                    <div>
+                        <label for="email">Email<span class="required">*</span></label>
+                        <input type="email" name="email">
+                        {% for message in get_flashed_messages(category_filter = ['error_users_email'])%}
+                            <p class="error">{{ message }}</p>
+                        {% endfor %}
+                    </div>
+                    <div>
+                        <label for="password">Password<span class="required">*</span></label>
+                        <input type="password" name="password">
+                        {% for message in get_flashed_messages(category_filter = ['error_users_password'])%}
+                            <p class="error">{{ message }}</p>
+                        {% endfor %}
+                    </div>
+                    <div>
+                        <label for="confirm_password">Confirm Password<span class="required">*</span></label>
+                        <input type="password" name="confirm_password">
+                        {% for message in get_flashed_messages(category_filter = ['error_users_confirm_password'])%}
+                            <p class="error">{{ message }}</p>
+                        {% endfor %}
+                    </div>
+                    <input type="submit" value="Register">
+                </div>
+            </form>
+        </div>
+        <div class="login_box flex_col">
+            <h1>Login</h1>
+            <form action="/validate_login" method="post">
+                <div class="flex_col form_container">
+                    <div>
+                        <label for="email">Email</label>
+                        <input type="email" name="email">
+                        {% for message in get_flashed_messages(category_filter = ['error_users_email_login'])%}
+                            <p class="error">{{ message }}</p>
+                        {% endfor %}
+                    </div>
+                    <div>
+                        <label for="password">Password</label>
+                        <input type="password" name="password">
+                        {% for message in get_flashed_messages(category_filter = ['error_users_password_login', 'error_users_login'])%}
+                            <p class="error">{{ message }}</p>
+                        {% endfor %}
+                    </div>
+                    <input type="submit" value="Login">
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | Recipe Network</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"
+</head>
+<body>
+    <div class="top_nav_bar flex_row">
+        <h1>Welcome {{ user.first_name }}!</h1>
+        <div>
+            <a href="/recipes/new">Create Recipe</a>
+            <a href="/logout">Logout</a>
+        </div>
+    </div>
+    <p>These are the recipes:</p>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Under 30 Minutes?</th>
+            <th>Actions</th>
+            <th>Created By</th>
+        </tr>
+        <tr>
+        {% for recipe in all_recipes %}
+        <tr>
+            <td>{{ recipe.name }}</td>
+            {% if recipe.under_30 %}
+                <td>Yes</td>
+            {% else %}
+                <td>No</td>
+            {% endif %}
+            <td>
+                <a href="/recipes/{{ recipe.id }}">View</a>
+                {% if recipe.user_id == user.id %}
+                 | <a href="/recipes/{{ recipe.id }}/edit">Edit</a>
+                 | <a href="/recipes/{{ recipe.id }}/delete">Delete</a>
+                {% endif %}
+            </td>
+            <td>{{ recipe.first_name }} {{ recipe.last_name }}</td>
+        </tr>
+        {% endfor %}
+        </tr>
+    </table>
+</body>
+</html>

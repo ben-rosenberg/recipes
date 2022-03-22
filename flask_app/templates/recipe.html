@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ recipe.name }} | Recipe Network</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"
+</head>
+<body>
+    <div class="top_nav_bar flex_row">
+        <h1>Welcome {{ user.first_name }}!</h1>
+        <div>
+            <a href="/dashboard">Dashboard</a>
+            <a href="/logout">Logout</a>
+        </div>
+    </div>
+    <h1>{{ recipe.name }}</h1>
+    <div class="flex_row">
+        <div class="flex_col black_border">
+            <p>Description</p>
+            <p>Under 30 Minutes?</p>
+            <p>Instructions</p>
+            <p>Recipe Origin Date</p>
+            <p>Added By</p>
+        </div>
+        <div class="flex_col black_border">
+            <p>{{ recipe.description }}</p>
+            {% if recipe.under_30 %}
+                <p>Yes</p>
+            {% else %}
+                <p>No</p>
+            {% endif %}
+            <p>{{ recipe.instructions }}</p>
+            <p>{{ recipe.origin_date }}</p>
+            <p>{{ recipe.first_name }} {{ recipe.last_name }}</p>
+        </div>
+    </div>
+    {% if user.id == recipe.user_id %}
+        <a href="/recipes/{{ recipe.id }}/edit">Edit</a> | 
+        <a href="/recipes/{{ recipe.id }}/delete">Delete</a>
+    {% endif %}
+</body>
+</html>

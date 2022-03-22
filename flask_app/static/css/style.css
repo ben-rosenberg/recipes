@@ -1,0 +1,47 @@
+.page {
+    margin: 20px 50px 0px 50px;
+}
+
+.content {
+    margin: 0px auto;
+    justify-content: space-evenly;
+}
+
+.gap {
+    gap: 20px;
+}
+
+.flex_row {
+    display: flex;
+}
+
+.flex_col {
+    display: flex;
+    flex-direction: column;
+}
+
+.center {
+    margin: 0px auto;
+}
+
+.top_nav_bar {
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.form_container {
+    gap: 20px;
+    justify-content: space-between;
+}
+
+.error {
+    color: rgb(175, 0, 38);
+}
+
+.required {
+    color: rgb(175, 0, 38);
+}
+
+.black_border {
+    border: 3px solid black;
+}

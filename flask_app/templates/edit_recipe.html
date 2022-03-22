@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Recipe | Recipe Network</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"
+</head>
+<body>
+    <div class="top_nav_bar flex_row">
+        <h1>Edit Recipe</h1>
+        <div>
+            <a href="/dashboard">Dashboard</a>
+            <a href="/logout">Logout</a>
+        </div>
+    </div>
+    <form action="/recipes/{{ recipe.id }}/update" method="post">
+        <div class="content flex_row">
+            <div class="flex_col">
+                <label for="name">Recipe Name<span class="required">*</span></label>
+                <input type="text" name="name" value="{{ recipe.name }}">
+                {% for message in get_flashed_messages(category_filter = ['error_recipe_name']) %}
+                    <p class="error">{{ message }}</p>
+                {% endfor %}
+                <label for="description">Description<span class="required">*</span></label>
+                <textarea name="description" cols="30" rows="10">{{ recipe.description }}</textarea>
+                {% for message in get_flashed_messages(category_filter = ['error_recipe_description']) %}
+                    <p class="error">{{ message }}</p>
+                {% endfor %}
+                <label for="Instructions">Instructions<span class="required">*</span></label>
+                <textarea name="instructions" cols="30" rows="10">{{ recipe.instructions }}</textarea>
+                {% for message in get_flashed_messages(category_filter = ['error_recipe_instructions']) %}
+                    <p class="error">{{ message }}</p>
+                {% endfor %}
+            </div>
+            <div class="flex_col">
+                <label for="origin_date">Recipe First Made On<span class="required">*</span></label>
+                <input type="date" name="origin_date" value="{{ recipe.origin_date }}">
+                {% for message in get_flashed_messages(category_filter = ['error_recipe_origin_date']) %}
+                    <p class="error">{{ message }}</p>
+                {% endfor %}
+                <div>
+                    <p>Under 30 Minutes?<span class="required">*</span></p>
+                    <input type="radio" name="under_30" id="yes" value="1" {% if recipe.under_30 %}checked{% endif %}>
+                    <label for="yes">Yes</label>
+                    <input type="radio" name="under_30" id="no" value="0" {% if not recipe.under_30 %}checked{% endif %}>
+                    <label for="no">No</label>
+                </div>
+                <input type="submit" value="Update">
+            </div>
+        </div>
+    </form>
+</body>
+</html>
